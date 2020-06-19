@@ -24,13 +24,6 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      id: success-steg
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-
     - name: Run a multi-line script
       id: fail-steg
       run: |
@@ -38,15 +31,24 @@ jobs:
         echo echoe echeoce ee e
         git tat aasdsada sdasdasd asd asd a
 
+    # Runs a set of commands using the runners shell
+    - name: Run a multi-line script
+      id: success-steg
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+
+
+
 
     - name: SUCCESSS
-      if: steps.success-steg.outcome == success()
+      if: always() && steps.success-steg.outcome == success
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
 
     - name: FAILURE
-      if: steps.fail-steg.outcome == failure()
+      if: always() && steps.fail-steg.outcome == failure
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
