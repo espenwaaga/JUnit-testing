@@ -31,12 +31,12 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-    - name: Run a multi-line script
-      id: fail-steg
-      run: |
-        echo Add other actions to build,
-        echo echoe echeoce ee e
-        git tat aasdsada sdasdasd asd asd a
+#    - name: Run a multi-line script
+#      id: fail-steg
+#      run: |
+#        echo Add other actions to build,
+#        echo echoe echeoce ee e
+#        git tat aasdsada sdasdasd asd asd a
 
 
     - name: SUCCESSS
