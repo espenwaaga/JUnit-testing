@@ -31,7 +31,6 @@ jobs:
         echo test, and deploy your project.
 
     - name: Generer testrapport
-      if: steps.ghpages.outcome == 'success'
       shell: bash
       run: |
         git fetch origin gh-pages
@@ -43,7 +42,6 @@ jobs:
         
 
     - name: Deploy testrapport
-      if: steps.ghpages.outcome == 'success'
       uses: crazy-max/ghaction-github-pages@v2.0.0
       with:
         target_branch: gh-pages
