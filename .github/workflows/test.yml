@@ -26,22 +26,30 @@ jobs:
 
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
+      id: success-steg
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
 
-#    - name: Henter historie for allure rapport
-#      uses: actions/checkout@v2.3.1
-#      with:
-#        ref: gh-pages
-#        path: gh-pages
-#
-#    - name: Generer testrapport
-#      shell: bash
-#      run: |
-#        ls
-#        cd gh-pages/fpsak
-#        echo "Testing" >> test.txt
+    - name: Run a multi-line script
+      id: fail-steg
+      run: |
+        echo Add other actions to build,
+        echo echoe echeoce ee e
+        git tat aasdsada sdasdasd asd asd a
+
+
+    - name: SUCCESSS
+      if: steps.success-steg.outcome == 'success'
+      run: |
+        echo Add other actions to build,
+        echo echoe echeoce ee e
+
+    - name: FAILURE
+      if: steps.fail-steg.outcome == 'failure'
+      run: |
+        echo Add other actions to build,
+        echo echoe echeoce ee e
 
 
     - name: Generer testrapport
