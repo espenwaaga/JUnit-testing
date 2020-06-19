@@ -49,8 +49,7 @@ jobs:
       run: |
         git fetch origin gh-pages
         mkdir gh-pages
-        git --work-tree=gh-pages checkout origin/gh-pages -- .
-        ls
+        git --work-tree=gh-pages checkout origin/gh-pages -- fpsak/history
         cd gh-pages/fpsak
         echo "Testing" >> test.txt
 
