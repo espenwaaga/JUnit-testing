@@ -42,6 +42,7 @@ jobs:
         ls
         cd gh-pages/fpsak
         touch test.txt
+        echo "Testing" >> test.txt
 
 
     - name: Deploy testrapport
