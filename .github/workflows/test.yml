@@ -48,8 +48,8 @@ jobs:
       shell: bash
       run: |
         git fetch origin gh-pages
-        mkdir test
-        git --work-tree=test checkout origin/gh-pages -- .
+        mkdir gh-pages
+        git --work-tree=gh-pages checkout origin/gh-pages -- .
         ls
         cd test/fpsak
         echo "Testing" >> test.txt
