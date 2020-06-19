@@ -24,41 +24,52 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
-    - name: Run a multi-line script
+    - name: Kjører script som failer.
       if: always()
-      id: fail-steg
+      id: steg
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
         git tat aasdsada sdasdasd asd asd a
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      if: always()
-      id: success-steg
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        echo echoe echeoce ee e
-        git tat aasdsada sdasdasd asd asd a
-
-
 
 
     - name: SUCCESSS
-      if: always() && steps.success-steg.outcome == 'success'
+      if: always() && steps.steg.outcome == 'success'
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
 
     - name: FAILURE
-      if: always() && steps.fail-steg.outcome == 'failure'
+      if: always() && steps.steg.outcome == 'failure'
+      run: |
+        echo Add other actions to build,
+        echo echoe echeoce ee e
+
+
+
+    - name: Kjører script som går OK
+      if: always()
+      id: steg2
+      run: |
+        echo Add other actions to build,
+
+
+
+    - name: SUCCESSS
+      if: always() && steps.steg2.outcome == 'success'
+      run: |
+        echo Add other actions to build,
+        echo echoe echeoce ee e
+
+    - name: FAILURE
+      if: always() && steps.steg2.outcome == 'failure'
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
 
 
     - name: Generer testrapport
+      if: always()
       shell: bash
       run: |
         git fetch origin gh-pages
@@ -69,6 +80,7 @@ jobs:
 
 
     - name: Deploy testrapport
+      if: always()
       uses: crazy-max/ghaction-github-pages@v2.0.0
       with:
         build_dir: gh-pages
