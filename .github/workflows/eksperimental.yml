@@ -39,13 +39,13 @@ jobs:
         ls
         cd test/fpsak
         touch test.txt
-        
 
-    - name: Deploy testrapport
-      uses: crazy-max/ghaction-github-pages@v2.0.0
-      with:
-        target_branch: gh-pages
-        build_dir: test
-        keep_history: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#    - name: Deploy testrapport
+#      uses: crazy-max/ghaction-github-pages@v2.0.0
+#      with:
+#        target_branch: gh-pages
+#        build_dir: test
+#        keep_history: false
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
