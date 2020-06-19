@@ -42,13 +42,13 @@ jobs:
 
 
     - name: SUCCESSS
-      if: always() && steps.success-steg.outcome == success
+      if: always() && steps.success-steg.outcome == 'success'
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
 
     - name: FAILURE
-      if: always() && steps.fail-steg.outcome == failure
+      if: always() && steps.fail-steg.outcome == 'failure'
       run: |
         echo Add other actions to build,
         echo echoe echeoce ee e
