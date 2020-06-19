@@ -30,29 +30,29 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
 
-    - name: Henter historie for allure rapport
-      uses: actions/checkout@v2.3.1
-      with:
-        ref: gh-pages
-        path: gh-pages
+#    - name: Henter historie for allure rapport
+#      uses: actions/checkout@v2.3.1
+#      with:
+#        ref: gh-pages
+#        path: gh-pages
+#
+#    - name: Generer testrapport
+#      shell: bash
+#      run: |
+#        ls
+#        cd gh-pages/fpsak
+#        echo "Testing" >> test.txt
+
 
     - name: Generer testrapport
       shell: bash
       run: |
+        git fetch origin gh-pages
+        mkdir test
+        git --work-tree=test checkout origin/gh-pages -- .
         ls
-        cd gh-pages/fpsak
+        cd test/fpsak
         echo "Testing" >> test.txt
-
-
-#    - name: Generer testrapport
-#      shell: bash
-#      run: |
-#        git fetch origin gh-pages
-#        mkdir test
-#        git --work-tree=test checkout origin/gh-pages -- .
-#        ls
-#        cd test/fpsak
-
 
 
     - name: Deploy testrapport
