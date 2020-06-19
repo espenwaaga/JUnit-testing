@@ -51,7 +51,7 @@ jobs:
         mkdir gh-pages
         git --work-tree=gh-pages checkout origin/gh-pages -- .
         ls
-        cd test/fpsak
+        cd gh-pages/fpsak
         echo "Testing" >> test.txt
 
 
