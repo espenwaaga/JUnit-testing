@@ -41,8 +41,18 @@ jobs:
       run: |
         ls
         cd gh-pages/fpsak
-        touch test.txt
         echo "Testing" >> test.txt
+
+
+#    - name: Generer testrapport
+#      shell: bash
+#      run: |
+#        git fetch origin gh-pages
+#        mkdir test
+#        git --work-tree=test checkout origin/gh-pages -- .
+#        ls
+#        cd test/fpsak
+
 
 
     - name: Deploy testrapport
