@@ -24,6 +24,10 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
+    # Runs a single command using the runners shell
+    - name: Run a one-line script
+      run: echo Hello, world!
+
     - name: Kjører script som failer.
       if: always()
       id: steg
@@ -45,15 +49,11 @@ jobs:
         echo Add other actions to build,
         echo echoe echeoce ee e
 
-
-
     - name: Kjører script som går OK
       if: always()
       id: steg2
       run: |
         echo Add other actions to build,
-
-
 
     - name: SUCCESSS
       if: always() && steps.steg2.outcome == 'success'
@@ -86,3 +86,35 @@ jobs:
         build_dir: gh-pages
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setter miljøvariabler
+      if: always() && steps.steg2.outcome == 'success'
+      run: |
+        echo "TRIGGER=JUnit-testing" >> $GITHUB_ENV
+        echo "VERSION=latest" >> $GITHUB_ENV
+        echo "TEST_RESULTAT=Tests run: 98, Failures: 0, Errors: 0, Skipped: 8" >> $GITHUB_ENV
+        echo "DIFFERANSE=Testing" >> $GITHUB_ENV
+
+
+    - name: Bygger opp slack melding
+      if: always()
+      shell: bash
+      run: |
+        echo "::set-env name=SLACK_MESSAGE::*Trigger*: ${{ env.TRIGGER }}:${{ env.VERSION }}%0A*Resultat*: ${{ env.TEST_RESULTAT }}, Rapport: <https://navikt.github.io/fpsak-autotest/fpsak|Allure rapport>%0A*Endringer*: ${{ env.DIFFERANSE }}%0A*Action URL*: <https://github.com/navikt/fpsak-autotest/actions/runs/${{ env.RUN_ID }}|Github Action Url>"
+        echo "::set-env name=SLACK_TITLE::Autotestene er kjørt UTEN feil :rocket:"
+        echo "::set-env name=SLACK_COLOR::#37df1d"
+
+
+    - name: Slack Notification
+      if: always()
+      uses: rtCamp/action-slack-notify@v2.1.0
+      env:
+        SLACK_CHANNEL: vtp-autotest-resultat
+        SLACK_COLOR: ${{ env.SLACK_COLOR }}
+        SLACK_ICON: https://github.com/github.png?size=48
+        SLACK_TITLE: ${{ env.SLACK_TITLE }}
+        SLACK_MESSAGE: ${{ env.SLACK_MESSAGE }}
+        SLACK_USERNAME: Github Action
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_FOOTER: ''
+        MSG_MINIMAL: true
